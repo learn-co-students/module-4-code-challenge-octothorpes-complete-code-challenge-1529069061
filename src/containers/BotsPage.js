@@ -21,23 +21,23 @@ class BotsPage extends React.Component {
     });
   };
 
-  addBotToMyArmy = (e) => {
-    const botObj = this.state.botsCollection.find(bot => {
-      return bot.id === parseInt(e.currentTarget.id);
+  getBotObject = (id) => {
+    return this.state.botsCollection.find(bot => {
+      return bot.id === parseInt(id);
     });
+  }
+
+  addBotToMyArmy = (e) => {
+    const botObj = this.getBotObject(e.currentTarget.id);
     if (!this.state.myBotArmy.includes(botObj)){
       this.setState({
         myBotArmy: [...this.state.myBotArmy, botObj]
       });
-    }else{
-      alert(`${botObj.name} is already in your Army!`);
     }
   };
 
   removeBotFromMyArmy = (e) => {
-    const botObj = this.state.botsCollection.find(bot => {
-      return bot.id === parseInt(e.currentTarget.id);
-    });
+    const botObj = this.getBotObject(e.currentTarget.id);
     const botIndex = this.state.myBotArmy.indexOf(botObj);
     const myBotArmy = [...this.state.myBotArmy];
     myBotArmy.splice(botIndex, 1);
@@ -51,7 +51,6 @@ class BotsPage extends React.Component {
       <div>
         <YourBotArmy myBotArmy={this.state.myBotArmy} onClickHandler={this.removeBotFromMyArmy} />
         <BotCollection bots={this.state.botsCollection} onClickHandler={this.addBotToMyArmy} />
-        {/* put your components here */}
       </div>
     );
   }
