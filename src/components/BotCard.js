@@ -1,11 +1,11 @@
 import React from "react";
 
 const BotCard = props => {
-  const { bot } = props;
+  console.log(props)
 
   let botType;
 
-  switch (bot.bot_class) {
+  switch (props.stats['bot_class']) {
     case "Assault":
       botType = <i className="icon military" />;
       break;
@@ -23,34 +23,34 @@ const BotCard = props => {
     <div className="ui column">
       <div
         className="ui card"
-        key={bot.id}
+        key={props.stats['id']}
         onClick={() => console.log("add code to connect event listener")}
       >
         <div className="image">
-          <img alt="oh no!" src={bot.avatar_url} />
+          <img alt="oh no!" src={props.stats['avatar_url']} />
         </div>
         <div className="content">
           <div className="header">
-            {bot.name} {botType}
+            {props.stats['name']} {botType}
           </div>
 
           <div className="meta text-wrap">
-            <small>{bot.catchphrase}</small>
+            <small>{props.stats['catchphrase']}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {bot.health}
+            {props.stats['health']}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {bot.damage}
+            {props.stats['damage']}
           </span>
           <span>
             <i className="icon shield" />
-            {bot.armor}
+            {props.stats['armor']}
           </span>
         </div>
       </div>
