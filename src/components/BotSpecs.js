@@ -58,6 +58,7 @@ const BotSpecs = props => {
                 </div>
               </div>
             </div>
+            //my code, self explanitory
             <button
               className="ui button fluid"
               onClick={() => {
@@ -66,6 +67,7 @@ const BotSpecs = props => {
             >
               Go Back
             </button>
+            //same thing over here, didnt touch nuffin else, i think
             <button
               className="ui button fluid"
               onClick={() => {

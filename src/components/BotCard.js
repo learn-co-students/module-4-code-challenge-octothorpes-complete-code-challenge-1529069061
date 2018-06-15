@@ -3,7 +3,11 @@ import React from "react";
 const BotCard = props => {
 
   let botType;
+// so i had some wierd thing going on where i didnt know how to do the thing, so i replaced everything with something that worked.
+//DEFINATEY bad practice, but time constraints and panic make strange bedfellows
 
+//i replaced the prop object...with the prop.
+//strangly enough, the other card spec workedlike a charm, so *shrug*
   switch (props.stats['bot_class']) {
     case "Assault":
       botType = <i className="icon military" />;
@@ -18,11 +22,14 @@ const BotCard = props => {
       botType = <div />;
   }
 
+//onclick down there actually pulls double duty, when selected in yourbotarmy, it removes the card, when
+//clicked in the index, it selects the card. 
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={props.stats['id']}
+
         onClick={() => props.select(props.stats)}
       >
         <div className="image">

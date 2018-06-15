@@ -10,11 +10,16 @@ class BotsPage extends React.Component {
     this.state = {
       bots: [],
       yourBots: [],
+
+      //renders index page, or stats page?
       atIndex: true,
+
+      //activated when clicked, selects a bot > botstats
       selectedBot: null
     }
   }
 
+  
   componentDidMount(){
     fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
       .then( res => res.json() )
