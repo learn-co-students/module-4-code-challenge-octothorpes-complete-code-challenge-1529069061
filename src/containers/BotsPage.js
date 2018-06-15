@@ -16,50 +16,49 @@ class BotsPage extends React.Component {
     fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
     .then(response => response.json())
     .then(data => {
+      const newData = data.map((botObj) => {
+        var o = Object.assign({}, botObj);
+        o.enlisted = false;
+        return o;
+      });
+
       this.setState({
-        bots: data
-      }, () => {console.log(this.state)});
+        bots: newData
+      }, () => console.log("current state", this.state.bots));
     });
   }
 
-  //if enlisted, then remove it from the army,
-  //If not, enlist in to the army.
-  addOrRemoveBotFromArmy = (botId) => {
-    //if botscollection component, then search through this.state.bots.
-  }
-
-  addBotToArmy = (botId) => {
-    let bot = null;
-    let isRecruitedAlready = false;
-
-    this.state.recruitedBots.forEach((botObj) => {
-      if(botObj.id === Number(botId)) {
-        isRecruitedAlready = true;
-      }
+  handleClick = (botId) => {
+    const bot = this.state.recruitedBots.find((botObj) => {
+      return botObj.id === Number(botId);
     });
 
-    if(isRecruitedAlready === false) {
-      bot = this.state.bots.find((botObj) => {
+    if(!bot) {
+      const bot1 = this.state.bots.find((botObj) => {
         return botObj.id === Number(botId);
       });
 
-      bot["enlisted"] = true;
+      if(bot1) {
+        this.setState({
+          recruitedBots: this.state.recruitedBots.concat([bot1])
+        }, () => console.log("setting the state after a bot has been enlisted", this.state));
+      }
+    } else {
+      const bots = this.state.recruitedBots.filter((botObj) => {
+        return botObj.id !== Number(botId);
+      });
 
       this.setState({
-        recruitedBots: this.state.recruitedBots.concat([bot])
-      }, () => console.log("setting the state after a bot has been enlisted", this.state));
+        recruitedBots: bots
+      }, () => console.log("setting the state after a bot has been delisted", this.state));
     }
-  }
-
-  removeBotFromArmy = () => {
-
   }
 
   render() {
     return (
       <div>
-        <YourBotArmy recruitedBots={this.state.recruitedBots} removeBotFromArmy={this.removeBotFromArmy}/>
-        <BotCollection addBotToArmy={this.addBotToArmy} botsCollection={this.state.bots}/>
+        <YourBotArmy recruitedBots={this.state.recruitedBots} handleClick={this.handleClick}/>
+        <BotCollection handleClick={this.handleClick} botsCollection={this.state.bots}/>
       </div>
     );
   }

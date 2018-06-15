@@ -9,7 +9,7 @@ class YourBotArmy extends React.Component {
   render(){
     console.log("inside botarmy", this.props.recruitedBots)
     const botArmy = this.props.recruitedBots.map((botObj) => {
-      return <BotCard bot={botObj}/>
+      return <BotCard bot={botObj} handleClick={this.props.handleClick}/>
     });
 
     return (

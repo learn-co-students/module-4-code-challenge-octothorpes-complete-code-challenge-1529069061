@@ -61,7 +61,7 @@ const BotCard = props => {
 };
 
 let handleClick = (event) => {
-  props1.addBotToArmy(event.target.getAttribute("id"));
+  props1.handleClick(event.target.getAttribute("id"));
 }
 
 export default BotCard;
