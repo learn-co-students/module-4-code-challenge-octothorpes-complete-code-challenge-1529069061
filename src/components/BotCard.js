@@ -23,7 +23,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.stats['id']}
-        onClick={() => props.recruit(props.stats)}
+        onClick={() => props.select(props.stats)}
       >
         <div className="image">
           <img alt="oh no!" src={props.stats['avatar_url']} />

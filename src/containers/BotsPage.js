@@ -25,21 +25,20 @@ class BotsPage extends React.Component {
       })
   }
 
-  recruitBot = (newBotData) => {
-
+  selectBot = (newBotData) => {
     this.setState({
       atIndex: false,
       selectedBot: newBotData
     })
+  }
 
-
-    // this.setState({
-    //   yourBots: [...this.state.yourBots, newBotData]
-    // })
+  recruit = (newBotData) => {
+    this.setState({
+      yourBots: [...this.state.yourBots, newBotData]
+    })
   }
 
   backToIndex = () => {
-    console.log("hi")
     this.setState({
       atIndex:true
     })
@@ -54,12 +53,12 @@ class BotsPage extends React.Component {
 
     return (
       <div>
-        <YourBotArmy botsDB={this.state.yourBots}/>
+        <YourBotArmy botsDB={this.state.yourBots} />
         {
           (this.state.atIndex) ?
-          <BotCollection botsDB={remainingBots} recruit={this.recruitBot}/>
+          <BotCollection botsDB={remainingBots} select={this.selectBot} />
             :
-          <BotSpecs bot={this.state.selectedBot} backToIndex={this.backToIndex}/>
+          <BotSpecs bot={this.state.selectedBot} backToIndex={this.backToIndex} recruit={this.recruit}/>
         }
 
 
