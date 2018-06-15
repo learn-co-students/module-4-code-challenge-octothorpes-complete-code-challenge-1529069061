@@ -2,11 +2,14 @@ import React from "react";
 
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
+import BotSpecs from '../components/BotSpecs';
 
 class BotsPage extends React.Component {
   state = {
     botsCollection: [],
-    myBotArmy: []
+    myBotArmy: [],
+    singlePage: false,
+    singleBot: {}
   };
 
   componentWillMount() {
@@ -33,7 +36,7 @@ class BotsPage extends React.Component {
       this.setState({
         myBotArmy: [...this.state.myBotArmy, botObj]
       });
-    }
+    };
   };
 
   removeBotFromMyArmy = (e) => {
@@ -44,13 +47,28 @@ class BotsPage extends React.Component {
     this.setState({
       myBotArmy
     });
-  }
+  };
+
+  viewBot = (e) => {
+    const botObj = this.getBotObject(e.currentTarget.id);
+    this.setState({
+      singlePage: true,
+      singleBot: botObj
+    });
+  };
+
+  backToBotList = () => {
+    this.setState({
+      singlePage: false,
+      singleBot: {}
+    });
+  };
 
   render() {
     return (
       <div>
         <YourBotArmy myBotArmy={this.state.myBotArmy} onClickHandler={this.removeBotFromMyArmy} />
-        <BotCollection bots={this.state.botsCollection} onClickHandler={this.addBotToMyArmy} />
+        {this.state.singlePage ? <BotSpecs bot={this.state.singleBot} back={this.backToBotList} onClickHandler={this.addBotToMyArmy} /> : <BotCollection bots={this.state.botsCollection} onClickHandler={this.viewBot} /> }
       </div>
     );
   }
