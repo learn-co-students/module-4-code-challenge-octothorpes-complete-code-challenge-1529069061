@@ -23,7 +23,8 @@ const BotCard = props => {
     if (bot.added) {
       props.removeBot(bot.id)
     } else {
-      props.addBot(bot.id)
+      //props.addBot(bot.id)
+      props.showBot(bot.id)
     }
   }
 

@@ -1,12 +1,14 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     bots: [],
     yourBots: [],
+    showBot: null,
   }
 
   componentDidMount() {
@@ -18,7 +20,7 @@ class BotsPage extends React.Component {
     let yourBot = this.state.bots.find(bot => bot.id === id);
     const added = true;
     yourBot = {...yourBot, added};
-    //console.log(yourBot);
+
     const alreadyOwn = this.state.yourBots.find(bot => bot.id === yourBot.id);
 
     if (!alreadyOwn) {
@@ -41,11 +43,35 @@ class BotsPage extends React.Component {
     })
   }
 
+  showBot = (id) => {
+    console.log(id);
+    const yourBot = this.state.bots.find(bot => bot.id === id);
+    if (yourBot) {
+      this.setState({
+        showBot: yourBot
+      })
+    }
+  }
+
+  goback = () => {
+    this.setState({
+      showBot: null
+    })
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy yourBots={this.state.yourBots} removeBot={this.removeBot}/>
-        <BotCollection botCollection={this.state.bots} addBot={this.addBot} />
+        {/*<BotCollection botCollection={this.state.bots} addBot={this.addBot} />*/}
+        {this.state.showBot
+          ?
+          <BotSpecs bot={this.state.showBot} addBot={this.addBot} goback={this.goback}/>
+          :
+          null
+        }
+        <BotCollection botCollection={this.state.bots} showBot={this.showBot} />
+
       </div>
     );
   }
