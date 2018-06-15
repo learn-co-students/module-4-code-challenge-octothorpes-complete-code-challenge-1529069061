@@ -31,11 +31,17 @@ class BotsPage extends React.Component {
   }
 
 
-  render() {
+  render(){
+
+    let remainingBots = this.state.bots.filter( (bot) => {
+      console.log(this.state.yourBots.includes(bot))
+      return !this.state.yourBots.includes(bot)
+    })
+
     return (
       <div>
         <YourBotArmy botsDB={this.state.yourBots}/>
-        <BotCollection botsDB={this.state.bots} recruit={this.recruitBot}/>
+        <BotCollection botsDB={remainingBots} recruit={this.recruitBot}/>
       </div>
     );
   }
