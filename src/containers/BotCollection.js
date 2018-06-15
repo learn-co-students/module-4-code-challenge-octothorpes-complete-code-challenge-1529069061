@@ -16,7 +16,7 @@ class BotCollection extends React.Component {
   	  <div className="ui four column grid">
     		<div className="row">
       		{ this.props.botsDB.map(  (botData) => {
-              return <BotCard stats={botData}/>
+              return <BotCard stats={botData} recruit={this.props.recruit}/>
           })}
 
 
