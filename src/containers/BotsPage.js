@@ -44,6 +44,15 @@ class BotsPage extends React.Component {
     })
   }
 
+  removeYourBot = (bot) => {
+    let temp = this.state.yourBots
+    let removalIndex = temp.indexOf(bot)
+    temp.splice(removalIndex, 1)
+    this.setState({
+      yourBots: temp
+    })
+  }
+
 
   render(){
 
@@ -53,7 +62,7 @@ class BotsPage extends React.Component {
 
     return (
       <div>
-        <YourBotArmy botsDB={this.state.yourBots} />
+        <YourBotArmy botsDB={this.state.yourBots} select={this.removeYourBot}/>
         {
           (this.state.atIndex) ?
           <BotCollection botsDB={remainingBots} select={this.selectBot} />

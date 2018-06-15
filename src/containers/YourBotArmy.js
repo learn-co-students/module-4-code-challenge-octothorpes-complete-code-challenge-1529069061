@@ -11,7 +11,7 @@ class YourBotArmy extends React.Component {
           <div className="row bot-army-row">
             {
               this.props.botsDB.map( (bot) => {
-                return <BotCard stats={bot}/>
+                return <BotCard stats={bot} select={this.props.select}/>
               } )
 
             }
