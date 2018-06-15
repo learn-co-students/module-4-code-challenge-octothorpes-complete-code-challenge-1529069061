@@ -26,7 +26,7 @@ class BotsPage extends React.Component {
 
   getBotObject = (id) => {
     return this.state.botsCollection.find(bot => {
-      return bot.id === parseInt(id);
+      return bot.id === parseInt(id, 10);
     });
   }
 
