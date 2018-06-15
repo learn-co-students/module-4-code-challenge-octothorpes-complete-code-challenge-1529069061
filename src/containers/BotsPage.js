@@ -28,7 +28,7 @@ class BotsPage extends React.Component {
     return this.state.botsCollection.find(bot => {
       return bot.id === parseInt(id, 10);
     });
-  }
+  };
 
   addBotToMyArmy = (e) => {
     const botObj = this.getBotObject(e.currentTarget.id);
@@ -71,8 +71,8 @@ class BotsPage extends React.Component {
         {this.state.singlePage ? <BotSpecs bot={this.state.singleBot} back={this.backToBotList} onClickHandler={this.addBotToMyArmy} /> : <BotCollection bots={this.state.botsCollection} onClickHandler={this.viewBot} /> }
       </div>
     );
-  }
+  };
 
-}
+};
 
 export default BotsPage;

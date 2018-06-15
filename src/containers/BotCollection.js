@@ -5,10 +5,10 @@ class BotCollection extends React.Component {
 
 	renderBots = () => {
 		const allBots = this.props.bots.map((bot, index) => {
-			return <BotCard bot={bot} key={index} onClickHandler={this.props.onClickHandler} />
+			return <BotCard bot={bot} key={index} onClickHandler={this.props.onClickHandler} />;
 		});
 		return allBots;
-	}
+	};
 
   render(){
 		const renderBots = this.renderBots();
@@ -19,7 +19,7 @@ class BotCollection extends React.Component {
     		</div>
   	  </div>
   	);
-  }
+  };
 
 };
 
