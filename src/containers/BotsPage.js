@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
 
@@ -8,7 +9,9 @@ class BotsPage extends React.Component {
     super(props)
     this.state = {
       bots: [],
-      yourBots: []
+      yourBots: [],
+      atIndex: true,
+      selectedBot: null
     }
   }
 
@@ -23,25 +26,43 @@ class BotsPage extends React.Component {
   }
 
   recruitBot = (newBotData) => {
-    console.log("hi")
-    console.log(newBotData)
+
     this.setState({
-      yourBots: [...this.state.yourBots, newBotData]
-    },console.log(this.state))
+      atIndex: false,
+      selectedBot: newBotData
+    })
+
+
+    // this.setState({
+    //   yourBots: [...this.state.yourBots, newBotData]
+    // })
+  }
+
+  backToIndex = () => {
+    console.log("hi")
+    this.setState({
+      atIndex:true
+    })
   }
 
 
   render(){
 
     let remainingBots = this.state.bots.filter( (bot) => {
-      console.log(this.state.yourBots.includes(bot))
       return !this.state.yourBots.includes(bot)
     })
 
     return (
       <div>
         <YourBotArmy botsDB={this.state.yourBots}/>
-        <BotCollection botsDB={remainingBots} recruit={this.recruitBot}/>
+        {
+          (this.state.atIndex) ?
+          <BotCollection botsDB={remainingBots} recruit={this.recruitBot}/>
+            :
+          <BotSpecs bot={this.state.selectedBot} backToIndex={this.backToIndex}/>
+        }
+
+
       </div>
     );
   }
