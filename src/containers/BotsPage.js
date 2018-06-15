@@ -22,6 +22,12 @@ class BotsPage extends React.Component {
     });
   }
 
+  //if enlisted, then remove it from the army,
+  //If not, enlist in to the army.
+  addOrRemoveBotFromArmy = (botId) => {
+    //if botscollection component, then search through this.state.bots.
+  }
+
   addBotToArmy = (botId) => {
     let bot = null;
     let isRecruitedAlready = false;
